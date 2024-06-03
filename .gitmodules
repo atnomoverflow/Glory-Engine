@@ -1,0 +1,6 @@
+[submodule "GloryEngine/vendor/imgui"]
+	path = GloryEngine/vendor/imgui
+	url = git@github.com:atnomoverflow/imgui.git
+[submodule "GloryEngine/vendor/GLFW"]
+	path = GloryEngine/vendor/GLFW
+	url = git@github.com:atnomoverflow/glfw.git
