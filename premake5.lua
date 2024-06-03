@@ -1,16 +1,18 @@
 workspace " GloryEngine"
+    architecture "x64"
+
     configurations { "Debug", "Release" }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir= {}
 
-IncludeDir["GLFW"]  = "GlodyEngine/vendor/GLFW/include"
-IncludeDir["ImGui"] = "GlodyEngine/vendor/imgui"
+IncludeDir["GLFW"]  = "GloryEngine/vendor/GLFW/include"
+IncludeDir["ImGui"] = "GloryEngine/vendor/imgui"
 
 
-include "GlodyEngine/vendor/GLFW"
-include "GlodyEngine/vendor/imgui"
+include "GloryEngine/vendor/GLFW"
+include "GloryEngine/vendor/imgui"
 
 
 project "GloryEngine"
