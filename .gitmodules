@@ -4,3 +4,6 @@
 [submodule "GloryEngine/vendor/GLFW"]
 	path = GloryEngine/vendor/GLFW
 	url = git@github.com:atnomoverflow/glfw.git
+[submodule "GloryEngine/vendor/spdlog"]
+	path = GloryEngine/vendor/spdlog
+	url = git@github.com:gabime/spdlog.git

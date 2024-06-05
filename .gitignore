@@ -1,4 +1,6 @@
 bin/**
+bin-int/**
+obj/** 
 build/**
 .vscode/**
 Makefile
