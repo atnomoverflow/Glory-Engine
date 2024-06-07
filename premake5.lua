@@ -23,7 +23,7 @@ project "GloryEngine"
     targetdir ("bin/" .. outputdir .. "%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "%{prj.name}")
 
-    pchheader "pchge.hpp"
+    pchheader "%{prj.name}/src/pchge.hpp"
     pchsource "%{prj.name}/src/pchge.cpp" 
 
     files { "%{prj.name}/src/**.hpp","%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp" }
@@ -36,7 +36,11 @@ project "GloryEngine"
         "%{IncludeDir.ImGui}"
     }
 
-
+	links 
+	{ 
+		"GLFW",
+		"ImGui",
+	}
     filter "system:windows"
         cppdialect "C++20"
         staticruntime "On"
@@ -48,10 +52,11 @@ project "GloryEngine"
 			"GLORY_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
-    filter "system:lunix"
+    filter "system:linux"
         defines {
             "GLORY_PLATFORM_LINUX",
             "GLORY_BUILD_SHARED",
+			"GLFW_INCLUDE_NONE"
         }
         cppdialect "C++20"
         staticruntime "On"
@@ -61,11 +66,13 @@ project "GloryEngine"
 			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
     filter "configurations:Debug"
-        defines { "DEBUG" }
+        defines { "GLORY_DEBUG","DEBUG" }
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines { "NDEBUG" }
+        buildoptions "/MD"
         optimize "On"
 project "Sandbox"
 	location "Sandbox"
@@ -93,10 +100,12 @@ project "Sandbox"
 		cppdialect "C++20"
 		staticruntime "On"
 		systemversion "latest"
-
 		defines
 		{
-			"GLORY_PLATFORM_LINUX"
+			"GLORY_PLATFORM_LINUX",
+            "GLORY_BUILD_SHARED",
+            "GLFW_INCLUDE_NONE"
+
 		}
     filter "system:windows"
 		cppdialect "C++20"
@@ -109,9 +118,9 @@ project "Sandbox"
 		}
 
     filter "configurations:Debug"
-    defines "GLORY_DEBUG"
-    buildoptions "/MDd"
-    symbols "On"
+        defines "GLORY_DEBUG"
+        buildoptions "/MDd"
+        symbols "On"
 
     filter "configurations:Release"
         defines "GLORY_RELEASE"

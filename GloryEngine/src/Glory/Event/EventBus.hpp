@@ -6,12 +6,16 @@
 
 namespace Glory
 {
-    class EventBuss
+    class GLORY_API EventBuss
     {
     public:
         template <typename EventType>
-        ListenerID RegisterEventListenerFor(const typename EventListener<EventType>::EventHandler &callBack);
-        void UnregisterEventListener(const ListenerID &id);
+            requires std::derived_from<EventType, Event> // C++20
+        ID_t RegisterEventListenerFor(const typename EventListener<EventType>::EventHandler &callBack)
+        {
+            return m_Register.RegisterEventListenerFor<EventType>(callBack);
+        }
+        void UnregisterEventListener(const ID_t &id);
         void PublishEvent(EventQueue &eventQueue) const;
 
     private:
